@@ -8,6 +8,8 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
 import java.time.OffsetDateTime;
+import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 @Component
@@ -17,12 +19,12 @@ public class InventoryHandler {
 
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_STREAM_JSON)
-                .body(Mono.just(BeerInventoryDto.builder()
+                .body(Mono.just(Collections.singletonList(BeerInventoryDto.builder()
                         .beerId(UUID.fromString("00000000-0000-0000-0000-000000000000"))
                         .id(UUID.randomUUID())
                         .quantityOnHand(999)
                         .createdDate(OffsetDateTime.now())
                         .lastModifiedDate(OffsetDateTime.now())
-                        .build()), BeerInventoryDto.class);
+                        .build())), List.class);
     }
 }
